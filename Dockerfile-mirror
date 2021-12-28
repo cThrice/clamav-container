@@ -1,0 +1,17 @@
+FROM nginx:latest
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y -qq \
+        cron \
+        python3-pip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip3 install --no-cache-dir --upgrade pip  && \
+    pip3 install --no-cache-dir cvdupdate
+
+VOLUME /usr/share/nginx/html
+COPY update-mirror.sh /update-mirror.sh
+RUN chmod 0744 /update-mirror.sh && /update-mirror.sh
+RUN echo '0 * * * * root /update-mirror.sh >/proc/1/fd/1 2>/proc/1/fd/2' > /etc/crontab && \
+    sed -i '3i\/update-mirror.sh' /docker-entrypoint.sh && \
+    sed -i '3i\cron' /docker-entrypoint.sh
