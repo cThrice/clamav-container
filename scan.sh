@@ -11,9 +11,9 @@ else
   clamdscan --multiscan \
         --stdout \
         --no-summary \
-        --reload \
         --infected \
         /host-fs 
 
   rm $LOCK
+  echo `date` Finished scan
 fi
