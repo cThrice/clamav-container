@@ -1,0 +1,8 @@
+[atomic]
+name = Rocky / CentOS / Red Hat Enterprise Linux $releasever - atomic
+mirrorlist = https://updates.atomicorp.com/channels/mirrorlist/atomic/centos-$releasever-$basearch
+enabled = 1
+protect = 0
+gpgkey = https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt
+gpgcheck = 1
+
