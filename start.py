@@ -7,7 +7,7 @@ from os import path
 def init_conf(conffile):
     print(f"Initializing conf file {conffile}")
     if os.path.exists(f"/etc/clamav-custom/{conffile}"):
-        os.system(f"cp /etc/clamav-custom/{conffile} /etc/clamav/{conffile}")
+        os.system(f"cp /etc/clamav-custom/{conffile} /etc/{conffile}")
 
 init_conf("clamd.conf")
 init_conf("freshclam.conf")
@@ -23,7 +23,7 @@ os.system("[ -f /data/main.cvd ] || freshclam")
 os.system("freshclam -d -c 24")
 
 # Start cron ( for scheduled scans
-os.system("cron")
+os.system("crond")
 
 # Run clamav
 os.system("clamd")
